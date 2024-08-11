@@ -22,6 +22,9 @@ class FsStorage implements Storage
 
     public function put(string $filename, string $contents): bool
     {
+        if (!is_dir(dirname($filename))) {
+            mkdir(dirname($filename), 0777, true);
+        }
         return file_put_contents($filename, $contents) !== false;
     }
 
